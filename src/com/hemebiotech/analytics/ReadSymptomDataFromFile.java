@@ -12,12 +12,13 @@ import java.util.List;
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
-	private String filepath;
-	
 	/**
-	 * 
+	 *
 	 * @param filepath a full or partial path to file with symptom strings in it, one per line
 	 */
+	private String filepath;
+
+
 	public ReadSymptomDataFromFile (String filepath) {
 		this.filepath = filepath;
 	}

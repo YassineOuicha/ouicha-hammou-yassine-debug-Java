@@ -1,43 +1,51 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 public class AnalyticsCounter {
-	private static int headacheCount = 0;	// initialize to 0
-	private static int rashCount = 0;		// initialize to 0
-	private static int pupilCount = 0;		// initialize to 0
-	
-	public static void main(String args[]) throws Exception {
-		// first get input
-		BufferedReader reader = new BufferedReader (new FileReader("symptoms.txt"));
-		String line = reader.readLine();
 
-		int i = 0;	// set i to 0
-		int headCount = 0;	// counts headaches
-		while (line != null) {
-			i++;	// increment i
-			System.out.println("symptom from file: " + line);
-			if (line.equals("headache")) {
-				headCount++;
-				System.out.println("number of headaches: " + headCount);
-			}
-			else if (line.equals("rush")) {
-				rashCount++;
-			}
-			else if (line.contains("pupils")) {
-				pupilCount++;
-			}
+	/**
+	 * File path to the "symptoms.txt" file
+	 * and extraction of the list of symptoms from the file.
+	 */
+	private static String filepath = "symptoms.txt";
+	private static List<String> symptomsList = new ReadSymptomDataFromFile(filepath).GetSymptoms();
 
-			line = reader.readLine();	// get another symptom
+	public static void main(String[] args) throws Exception {
+
+		// An array to track visited symptoms so we don't count the sale symptom more than one time
+		List<String> visitedSymptoms = new ArrayList<>();
+
+		// Iterate through the symptomsList to count occurrences
+		for (int i = 0; i < symptomsList.size(); i++) {
+			// The current symptom in the list
+			String symptom = symptomsList.get(i);
+
+			/**
+			 * If the symptom doesn't appear on the visited list we continue the counting of this new element,
+			 * Otherways we move to the next symptom
+			 */
+
+			if (!visitedSymptoms.contains(symptom)) {
+				int count = 0;
+				// Count how many times this symptom appears
+				for (int j = 0; j < symptomsList.size(); j++) {
+					if (symptom.equals(symptomsList.get(j))) {
+						count++;
+					}
+				}
+
+				// Print the symptom and its count
+				System.out.println(symptom + " : " + count);
+
+				// Add the symptom to the visited list to avoid counting it again
+				visitedSymptoms.add(symptom);
+			}
 		}
-		
-		// next generate output
-		FileWriter writer = new FileWriter ("result.out");
-		writer.write("headache: " + headacheCount + "\n");
-		writer.write("rash: " + rashCount + "\n");
-		writer.write("dialated pupils: " + pupilCount + "\n");
-		writer.close();
+
 	}
 }
