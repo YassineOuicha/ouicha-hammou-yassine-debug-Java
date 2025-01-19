@@ -7,40 +7,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Simple brute force implementation
- *
+ * Implementation of the ISymptomReader interface that reads symptoms from a text file.
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
-	private String filepath;
-	
+	private String filepath; // Path to the file containing symptoms
+
 	/**
-	 * 
-	 * @param filepath a full or partial path to file with symptom strings in it, one per line
+	 * Constructor for the implementation of ReadSymptomDataFromFile class
+	 *
+	 * @param filepath The path to the file containing symptoms
 	 */
 	public ReadSymptomDataFromFile (String filepath) {
 		this.filepath = filepath;
 	}
-	
+
+	/**
+	 * Reads the symptoms from the specified file and returns a list of strings (symptoms)
+	 * @return A list of strings representing symptoms
+	 */
+
 	@Override
-	public List<String> GetSymptoms() {
+	public List<String> getSymptoms() {
+
 		ArrayList<String> result = new ArrayList<String>();
-		
-		if (filepath != null) {
-			try {
-				BufferedReader reader = new BufferedReader (new FileReader(filepath));
+
+		try (BufferedReader reader = new BufferedReader (new FileReader(filepath))) {
 				String line = reader.readLine();
-				
 				while (line != null) {
 					result.add(line);
 					line = reader.readLine();
 				}
-				reader.close();
-			} catch (IOException e) {
+
+		} catch (IOException e) {
 				e.printStackTrace();
-			}
 		}
-		
+
+		System.out.println("Read symptoms: " + result);  // Check point to debug
+
 		return result;
 	}
 
