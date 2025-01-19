@@ -1,51 +1,55 @@
 package com.hemebiotech.analytics;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 
 
 public class AnalyticsCounter {
 
-	/**
-	 * File path to the "symptoms.txt" file
-	 * and extraction of the list of symptoms from the file.
-	 */
+
 	private static String filepath = "symptoms.txt";
-	private static List<String> symptomsList = new ReadSymptomDataFromFile(filepath).GetSymptoms();
+	private ISymptomReader reader;
+	private	ISymptomWriter writer;
 
-	public static void main(String[] args) throws Exception {
+	public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
+		this.reader = reader;
+		this.writer = writer;
+	}
 
-		// An array to track visited symptoms so we don't count the sale symptom more than one time
+	public List<String> getSymptoms(){
+		return reader.GetSymptoms();
+	}
+
+	public Map<String, Integer> countSymptoms(List<String> symptoms){
+
+		Map<String, Integer> symptomsMap = new HashMap<>();
 		List<String> visitedSymptoms = new ArrayList<>();
 
-		// Iterate through the symptomsList to count occurrences
-		for (int i = 0; i < symptomsList.size(); i++) {
-			// The current symptom in the list
-			String symptom = symptomsList.get(i);
-
-			/**
-			 * If the symptom doesn't appear on the visited list we continue the counting of this new element,
-			 * Otherways we move to the next symptom
-			 */
+		for (int i = 0; i < symptoms.size(); i++) {
+			String symptom = symptoms.get(i);
 
 			if (!visitedSymptoms.contains(symptom)) {
 				int count = 0;
-				// Count how many times this symptom appears
-				for (int j = 0; j < symptomsList.size(); j++) {
-					if (symptom.equals(symptomsList.get(j))) {
+
+				for (int j = 0; j < symptoms.size(); j++) {
+					if (symptom.equals(symptoms.get(j))) {
 						count++;
 					}
 				}
-
-				// Print the symptom and its count
-				System.out.println(symptom + " : " + count);
-
-				// Add the symptom to the visited list to avoid counting it again
 				visitedSymptoms.add(symptom);
+				symptomsMap.put(symptom, count);
 			}
 		}
 
+		return symptomsMap;
 	}
+
+	public Map<String, Integer> sortSymptoms(Map<String, Integer> symptoms){
+		return new TreeMap<>(symptoms);
+	}
+
+	public void writeSymptoms (Map<String, Integer> symptoms){
+		writer.writeSymptoms(symptoms);
+	}
+
 }
