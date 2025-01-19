@@ -7,18 +7,29 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        ISymptomReader reader = new ReadSymptomDataFromFile("symptoms.txt");
-        ISymptomWriter writer = new WriteSymptomDataToFile();
+        try {
+            ISymptomReader reader = new ReadSymptomDataFromFile("symptoms.txt");
+            ISymptomWriter writer = new WriteSymptomDataToFile("result.out");
 
-        AnalyticsCounter analyticsCounter = new AnalyticsCounter(reader, writer);
+            AnalyticsCounter analyticsCounter = new AnalyticsCounter(reader, writer);
 
-        List<String> symptoms = analyticsCounter.getSymptoms();
+            List<String> symptoms = analyticsCounter.getSymptoms();
 
-        Map<String, Integer> symptomsMap = analyticsCounter.countSymptoms(symptoms);
+            Map<String, Integer> symptomsMap = analyticsCounter.countSymptoms(symptoms);
 
-        Map<String, Integer> sortedSymptoms = analyticsCounter.sortSymptoms(symptomsMap);
+            System.out.println("Symptoms Map: " + symptomsMap);  // Check
 
-        analyticsCounter.writeSymptoms(sortedSymptoms);
+            Map<String, Integer> sortedSymptoms = analyticsCounter.sortSymptoms(symptomsMap);
+
+            System.out.println("Sorted symptoms Map: " + sortedSymptoms);  // Check
+
+            analyticsCounter.writeSymptoms(sortedSymptoms);
+
+            System.out.println("Process terminated");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
