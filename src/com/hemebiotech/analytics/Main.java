@@ -17,10 +17,14 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
 
+        String filepathRead = "symptoms.txt";
+        String filepathWrite = "result.out";
+
         try {
             // Creates the reader and the writer objects
-            ISymptomReader reader = new ReadSymptomDataFromFile("symptoms.txt");
-            ISymptomWriter writer = new WriteSymptomDataToFile("result.out");
+
+            ISymptomReader reader = new ReadSymptomDataFromFile(filepathRead);
+            ISymptomWriter writer = new WriteSymptomDataToFile(filepathWrite);
 
             // Creates the analyticsCounter object to get, count, sort and write the symptoms result file
             AnalyticsCounter analyticsCounter = new AnalyticsCounter(reader, writer);

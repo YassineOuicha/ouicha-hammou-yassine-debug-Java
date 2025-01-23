@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24e07df7-24a0-434c-89c7-6600a2574db9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/result.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ouicha-hammou-yassine-debug-Java/com/hemebiotech/analytics/AnalyticsCounter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ouicha-hammou-yassine-debug-Java/com/hemebiotech/analytics/AnalyticsCounter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ouicha-hammou-yassine-debug-Java/com/hemebiotech/analytics/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ouicha-hammou-yassine-debug-Java/com/hemebiotech/analytics/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hemebiotech/analytics/AnalyticsCounter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hemebiotech/analytics/AnalyticsCounter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hemebiotech/analytics/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hemebiotech/analytics/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symptoms.txt" beforeDir="false" afterPath="$PROJECT_DIR$/symptoms.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

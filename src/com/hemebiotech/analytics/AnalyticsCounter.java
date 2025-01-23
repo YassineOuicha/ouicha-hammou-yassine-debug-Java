@@ -1,6 +1,7 @@
 package com.hemebiotech.analytics;
 
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -11,7 +12,7 @@ import java.util.*;
 
 public class AnalyticsCounter {
 
-	private static String filepath = "symptoms.txt"; // path to the data file containing symptoms
+	 // path to the data file containing symptoms
 	private ISymptomReader reader; //
 	private	ISymptomWriter writer;
 
@@ -44,22 +45,11 @@ public class AnalyticsCounter {
 	public Map<String, Integer> countSymptoms(List<String> symptoms){
 
 		Map<String, Integer> symptomsMap = new HashMap<>();
-		List<String> visitedSymptoms = new ArrayList<>();
 
 		for (int i = 0; i < symptoms.size(); i++) {
 			String symptom = symptoms.get(i);
-
-			if (!visitedSymptoms.contains(symptom)) {
-				int count = 0;
-
-				for (int j = 0; j < symptoms.size(); j++) {
-					if (symptom.equals(symptoms.get(j))) {
-						count++;
-					}
-				}
-				visitedSymptoms.add(symptom); // Add current symptom visited to prevent duplication of symptoms
-				symptomsMap.put(symptom, count); // Add the pair symptom with occurrences into the map collection
-			}
+			List<String> findOccurrent = symptoms.stream().filter(s -> s.equals(symptom)).toList();
+			symptomsMap.put(symptom, findOccurrent.size()); // Add the pair symptom with occurrences into the map collection
 		}
 		return symptomsMap;
 	}
